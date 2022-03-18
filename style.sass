@@ -1,11 +1,10 @@
-$extra-color: #BDAE82
+$extra-color: #1b85ff
 $white-color: #FFFFFF
 $black-color: #000000
-$background-color: #cecece
 
 html
   color: $black-color
-  background: $background-color
+  background: $white-color
   transition: all 1s ease 0s
 body
   font-size: 20px
@@ -17,3 +16,47 @@ a
   transition: all 1s ease 0s
 a:hover
   color: $extra-color
+h1
+  font-size: 40px
+  @media (max-width: 768px)
+    font-size: 28px
+
+.container
+  max-width: 1440px
+  margin: 0px auto
+  padding: 0px 20px
+  transition: all 1s ease 0s
+  @media (max-width: 768px)
+    max-width: 768px
+  @media (max-width: 420px)
+    max-width: 420px
+
+.button
+  font-size: 16px
+  padding: 10px
+  min-width: 150px
+  font-weight: 700
+  background: $extra-color
+  color: $white-color
+  transition: all 1s ease 0s
+.button:hover
+  background: darken($extra-color, 10%)
+
+.main-container
+  height: 100vh
+  padding: 20px
+  position: relative
+  display: flex
+  justify-content: center
+  text-align: center
+  .content
+    width: 100%
+    display: flex
+    flex-direction: column
+    gap: 20px
+    align-items: center
+    .task-types
+      display: flex
+      gap: 10px
+      flex-wrap: wrap
+      justify-content: center

@@ -1,6 +1,6 @@
 html {
   color: #000000;
-  background: #cecece;
+  background: #FFFFFF;
   -webkit-transition: all 1s ease 0s;
   transition: all 1s ease 0s;
 }
@@ -20,5 +20,85 @@ a {
 }
 
 a:hover {
-  color: #BDAE82;
+  color: #1b85ff;
+}
+
+h1 {
+  font-size: 40px;
+}
+@media (max-width: 768px) {
+  h1 {
+    font-size: 28px;
+  }
+}
+
+.container {
+  max-width: 1440px;
+  margin: 0px auto;
+  padding: 0px 20px;
+  -webkit-transition: all 1s ease 0s;
+  transition: all 1s ease 0s;
+}
+@media (max-width: 768px) {
+  .container {
+    max-width: 768px;
+  }
+}
+@media (max-width: 420px) {
+  .container {
+    max-width: 420px;
+  }
+}
+
+.button {
+  font-size: 16px;
+  padding: 10px;
+  min-width: 150px;
+  font-weight: 700;
+  background: #1b85ff;
+  color: #FFFFFF;
+  -webkit-transition: all 1s ease 0s;
+  transition: all 1s ease 0s;
+}
+
+.button:hover {
+  background: #006be7;
+}
+
+.main-container {
+  height: 100vh;
+  padding: 20px;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  text-align: center;
+}
+.main-container .content {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 20px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.main-container .content .task-types {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 10px;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
