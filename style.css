@@ -20,7 +20,7 @@ a {
 }
 
 a:hover {
-  color: #1b85ff;
+  color: #0078d4;
 }
 
 h1 {
@@ -55,14 +55,12 @@ h1 {
   padding: 10px;
   min-width: 150px;
   font-weight: 700;
-  background: #1b85ff;
+  background: #0078d4;
   color: #FFFFFF;
-  -webkit-transition: all 1s ease 0s;
-  transition: all 1s ease 0s;
 }
 
 .button:hover {
-  background: #006be7;
+  background: #006abb;
 }
 
 .main-container {
