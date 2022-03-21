@@ -46,7 +46,6 @@ h1
   position: relative
   display: flex
   justify-content: center
-  text-align: center
   .content
     width: 100%
     display: flex
@@ -58,6 +57,17 @@ h1
       gap: 10px
       flex-wrap: wrap
       justify-content: center
+    .tasks-container
+      border: 5px solid $extra-color
+      padding: 15px
+      width: 100%
+      display: flex
+      flex-direction: column
+      gap: 15px
+      > div
+        border: 3px solid $extra-color
+        padding: 10px
+
 
 .pop
   position: fixed
