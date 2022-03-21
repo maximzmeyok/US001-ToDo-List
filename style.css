@@ -114,6 +114,12 @@ h1 {
 .main-container .content .tasks-container > div {
   border: 3px solid #0078d4;
   padding: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
 .pop {
