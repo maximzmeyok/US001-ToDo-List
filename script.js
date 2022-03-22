@@ -8,13 +8,13 @@ tasksArea.addEventListener('click', function(event) {
   let target = event.target;
 
   if (target.classList.contains('cross')) {
-    Task.removeTask(tasksObj.find(item => item.paragraphId === target.id).id);
-    //Task.removeTask(target.id);
-    //target.parentElement.parentElement.remove();
+    //Task.removeTask(tasksObj.find(item => item.paragraphId === target.id).id);
+    Task.removeTask(target.id);
+    target.parentElement.parentElement.remove();
   } else if (target.type == 'checkbox') {
 
   } else if (target.classList.contains('gear')) {
-    makePopChange();
+    makePopChange(target.id);
   }
 })
 
@@ -39,8 +39,8 @@ class Task {
       <p>Expiration date: <span>${this.expirationDate}</span></p>
       </div>
       <div>
-      <p>&#9744;</p>
-      <p class="gear">&#9881;</p>
+      <p class="checkbox" id="${this.id}">&#9744;</p>
+      <p class="gear" id="${this.id}">&#9881;</p>
       <p class="cross" id="${this.id}">&#9746;</p>
       </div>
     </div>
@@ -60,9 +60,9 @@ function makePopCreate() {
   popCreated.innerHTML = `
   <div class="pop-container">
     <h2>Create a new task</h2>
-    <input placeholder="Enter a task name" type="text" id="taskName" value="Make a task" required>
+    <input placeholder="Enter a task name" type="text" id="taskName" required value="111111111">
     <p>Expiration date:</p>
-    <input type="date" id="expirationDate" value="2022-03-21" required>
+    <input type="date" id="expirationDate" required value="2022-03-22">
     <button class="button" id="addTaskButtonOk">Ok</button>
     <button class="button" id="addTaskButtonCancel">Cancel</button>
   </div>
@@ -83,27 +83,32 @@ function makePopCreate() {
   });
 }
 
-function makePopChange() {
+function makePopChange(id) {
   let popChange = document.createElement("section");
   popChange.classList.add("pop");
-  popChange.innerHTML = `
+  let elem = tasksObj.find(item => item.id === id);/* Остановился здесь - нужно сохранять данные после изменения */
+  popChange.innerHTML = ` 
   <div class="pop-container">
     <h2>Change a task</h2>
-    <input placeholder="Enter a task name" type="text" id="taskName" value="Make a task" required>
+    <input placeholder="Enter a task name" type="text" id="taskName" value="${elem.taskName}" required>
     <p>Expiration date:</p>
-    <input type="date" id="expirationDate" value="2022-03-21" required>
-    <button class="button" id="addTaskButtonOk">Ok</button>
+    <input type="date" id="expirationDate" value="${elem.expirationDate}" required>
+    <button class="button" id="addTaskButtonSave">Save</button>
     <button class="button" id="addTaskButtonCancel">Cancel</button>
   </div>
   `;
   document.body.append(popChange);
-  document.querySelector('#addTaskButtonOk').addEventListener('click', function() {
+  document.querySelector('#addTaskButtonSave').addEventListener('click', function() {
     let taskName = document.querySelector('#taskName').value;
     let expirationDate = document.querySelector('#expirationDate').value;
     if (taskName && expirationDate) {
-      let task = new Task(taskName, expirationDate);
-      tasksObj.push(task);
-      tasksArea.innerHTML += task.getInnerHtml();
+      elem.taskName = taskName;
+      elem.expirationDate = expirationDate;
+      document.getElementById(`${id}`).firstElementChild.firstElementChild.firstElementChild.innerHTML = `${taskName}`;
+      document.getElementById(`${id}`).firstElementChild.lastElementChild.firstElementChild.innerHTML = `${expirationDate}`;
+      //let task = new Task(taskName, expirationDate);
+      //tasksObj.push(task);
+      //tasksArea.innerHTML += task.getInnerHtml();
       popChange.remove();
     }
   });
