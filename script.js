@@ -1,4 +1,6 @@
-let tasksObj = [];
+import {Task} from "./Task.js";
+
+export const tasksArray = [];
 
 const tasksArea = document.querySelector('#tasks');
 const addTaskButton = document.querySelector('#addTaskButton');
@@ -8,51 +10,13 @@ tasksArea.addEventListener('click', function(event) {
   let target = event.target;
 
   if (target.classList.contains('cross')) {
-    //Task.removeTask(tasksObj.find(item => item.paragraphId === target.id).id);
     Task.removeTask(target.id);
-    target.parentElement.parentElement.remove();
-  } else if (target.type == 'checkbox') {
-
+  } else if (target.classList.contains('checkbox')) {
+    Task.completeTask(target.id);
   } else if (target.classList.contains('gear')) {
     makePopChange(target.id);
   }
 })
-
-class Task {
-  constructor(taskName, expirationDate) {
-    this.taskName = taskName;
-    this.expirationDate = expirationDate;
-    this.isCompleted = false;
-    this.id = `${Date.now()}`;
-    this.textId = `textId${this.id}`;
-    this.dateId = `dateId${this.id}`;
-    this.gearId = `gearId${this.id}`
-    this.checkBoxId = `checkbox${this.id}`;
-    this.divId = `divId${this.id}`;
-    this.paragraphId = `paragraphId${this.id}`;
-  }
-  getInnerHtml() {
-    return `
-    <div id="${this.id}">
-      <div>
-      <p>Task: <span>${this.taskName}</span></p>
-      <p>Expiration date: <span>${this.expirationDate}</span></p>
-      </div>
-      <div>
-      <p class="checkbox" id="${this.id}">&#9744;</p>
-      <p class="gear" id="${this.id}">&#9881;</p>
-      <p class="cross" id="${this.id}">&#9746;</p>
-      </div>
-    </div>
-    `;
-  }
-  static removeTask(removedTask) {
-    //document.getElementById(removedTask).parentNode.removeChild(document.getElementById(removedTask));
-    document.getElementById(removedTask).remove();
-    const removeElemIndex = tasksObj.findIndex(item => item.id === removedTask);
-    tasksObj.splice(removeElemIndex, 1);
-  }
-}
 
 function makePopCreate() {
   let popCreated = document.createElement("section");
@@ -73,7 +37,7 @@ function makePopCreate() {
     let expirationDate = document.querySelector('#expirationDate').value;
     if (taskName && expirationDate) {
       let task = new Task(taskName, expirationDate);
-      tasksObj.push(task);
+      tasksArray.push(task);
       document.querySelector('#tasks').innerHTML += task.getInnerHtml();
       popCreated.remove();
     }
@@ -86,7 +50,7 @@ function makePopCreate() {
 function makePopChange(id) {
   let popChange = document.createElement("section");
   popChange.classList.add("pop");
-  let elem = tasksObj.find(item => item.id === id);/* Остановился здесь - нужно сохранять данные после изменения */
+  let elem = tasksArray.find(item => item.id === id);
   popChange.innerHTML = ` 
   <div class="pop-container">
     <h2>Change a task</h2>
@@ -106,9 +70,6 @@ function makePopChange(id) {
       elem.expirationDate = expirationDate;
       document.getElementById(`${id}`).firstElementChild.firstElementChild.firstElementChild.innerHTML = `${taskName}`;
       document.getElementById(`${id}`).firstElementChild.lastElementChild.firstElementChild.innerHTML = `${expirationDate}`;
-      //let task = new Task(taskName, expirationDate);
-      //tasksObj.push(task);
-      //tasksArea.innerHTML += task.getInnerHtml();
       popChange.remove();
     }
   });

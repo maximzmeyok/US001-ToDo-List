@@ -121,6 +121,10 @@ h1 {
       -ms-flex-pack: justify;
           justify-content: space-between;
 }
+.main-container .content .tasks-container .line-through > div:first-child {
+  text-decoration: line-through;
+  color: gray;
+}
 
 .pop {
   position: fixed;
