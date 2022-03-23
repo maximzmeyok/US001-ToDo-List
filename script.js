@@ -1,5 +1,5 @@
 import {Task} from "./Task.js";
-import {Pop} from "./Pop.js";
+import {PopUp} from "./PopUp.js";
 
 export const tasksArray = [];
 
@@ -7,8 +7,8 @@ const tasksArea = document.querySelector('#tasks');
 const addTaskButton = document.querySelector('#addTaskButton');
 
 addTaskButton.addEventListener('click', function(event) {
-  Pop.createPop();
-})
+  PopUp.createPopUp();
+});
 
 tasksArea.addEventListener('click', function(event) {
   const target = event.target;
@@ -18,6 +18,11 @@ tasksArea.addEventListener('click', function(event) {
   } else if (target.classList.contains('checkbox')) {
     Task.completeTask(target.id);
   } else if (target.classList.contains('gear')) {
-    Pop.createPop(target.id);
+    PopUp.createPopUp(target.id);
   }
-})
+});
+
+/*
+3 параметра - передаётся объект
+16 - 4ч
+*/
