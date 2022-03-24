@@ -2,8 +2,8 @@ import {Task} from "./Task.js";
 import {PopUp} from "./PopUp.js";
 import {createTask, showTasks, isValidTaskName, showWrongInput, showDefaultInput, showActiveTasks, showCompletedTasks, showAllTasks} from "./functions.js";
 
-export const REGEXP = new RegExp("^[a-zA-Z0-9а-яА-ЯёЁ]+$");
-export const tasksArray = [];
+export const REGEXP = new RegExp("^[a-zA-Z0-9а-яА-ЯёЁ ]+$");
+export let tasksArray = [];
 
 let windowState = 'All';
 
@@ -63,4 +63,9 @@ completedTasksButton.addEventListener('click', function() {
 allTasksButton.addEventListener('click', function() {
   windowState = 'All';
   showAllTasks();
+});
+
+clearCompletedTasksButton.addEventListener('click', function() {
+  tasksArray = tasksArray.filter(item => item.isCompleted === false);
+  showTasks(windowState);
 });
