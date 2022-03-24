@@ -1,0 +1,114 @@
+$extra-color: #0078d4
+$white-color: #FFFFFF
+$black-color: #000000
+
+html
+  color: $black-color
+  background: $white-color
+  transition: all 1s ease 0s
+body
+  font-size: 20px
+  font-family: Inter
+  font-weight: 400
+  transition: all 1s ease 0s
+a
+  color: inherit
+  transition: all 1s ease 0s
+a:hover
+  color: $extra-color
+h1
+  font-size: 40px
+  @media (max-width: 768px)
+    font-size: 28px
+
+.container
+  max-width: 1440px
+  margin: 0px auto
+  padding: 0px 20px
+  transition: all 1s ease 0s
+  @media (max-width: 768px)
+    max-width: 768px
+  @media (max-width: 420px)
+    max-width: 420px
+
+.button
+  font-size: 16px
+  padding: 10px
+  min-width: 150px
+  font-weight: 700
+  background: $extra-color
+  color: $white-color
+.button:hover
+  background: darken($extra-color, 5%)
+
+.main-container
+  padding: 20px
+  position: relative
+  display: flex
+  justify-content: center
+  .content
+    width: 100%
+    display: flex
+    flex-direction: column
+    gap: 20px
+    align-items: center
+    .add-input
+      display: flex
+      gap: 10px
+      flex-wrap: wrap
+      justify-content: center
+      input
+        outline: none
+        padding: 5px
+        border-bottom: 3px solid gray
+      .button-plus
+        min-width: 40px
+        height: 40px
+    .task-types
+      display: flex
+      gap: 10px
+      flex-wrap: wrap
+      justify-content: center
+    .tasks-container
+      border: 5px solid $extra-color
+      padding: 15px
+      width: 100%
+      display: flex
+      flex-direction: column
+      gap: 15px
+      > div
+        border: 3px solid $extra-color
+        padding: 10px
+        display: flex
+        justify-content: space-between
+      .line-through
+        > div:first-child
+          text-decoration: line-through
+          color: gray
+
+.pop
+  position: fixed
+  top: 0px
+  left: 0px
+  height: 100vh
+  width: 100vw
+  background: rgba(255, 255, 255, 0.8)
+  display: flex
+  justify-content: center
+  align-items: center
+  &-container
+    padding: 20px
+    background: $white-color
+    border: 5px solid $extra-color
+    min-width: 320px
+    width: 50vw
+    input
+      outline: none
+      width: 100%
+      padding: 5px
+      border-bottom: 3px solid gray
+      margin-bottom: 30px
+
+.rejected
+  background: rgba(255, 0, 0, 0.8)
+  color: $white-color
