@@ -87,6 +87,26 @@ h1 {
       -ms-flex-align: center;
           align-items: center;
 }
+.main-container .content .add-input {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 10px;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+.main-container .content .add-input input {
+  outline: none;
+  padding: 5px;
+  border-bottom: 3px solid gray;
+}
+.main-container .content .add-input .button-plus {
+  min-width: 40px;
+  height: 40px;
+}
 .main-container .content .task-types {
   display: -webkit-box;
   display: -ms-flexbox;

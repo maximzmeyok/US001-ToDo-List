@@ -11,26 +11,26 @@ export class PopUp {
     return `
     <div class="pop-container">
       <h2>${this.popUpType} the task</h2>
-      <input placeholder="Enter a task name" type="text" id="taskName" required value="${this.taskName}">
+      <input placeholder="Enter the task name" type="text" id="taskName" required value="${this.taskName}">
       <p>Expiration date:</p>
       <input type="date" id="expirationDate" required value="${this.expirationDate}">
-      <button class="button" id="addTaskButtonOk">Ok</button>
-      <button class="button" id="addTaskButtonCancel">Cancel</button>
+      <button class="button" id="taskButtonOk">Ok</button>
+      <button class="button" id="taskButtonCancel">Cancel</button>
     </div>
     `;
   }
 
 
   static addListeners(element) {
-    element ? PopUp.addListenerCreatePopUp(element) : PopUp.addListenerChangePopUp();
-    document.querySelector("#addTaskButtonCancel").addEventListener("click", function () {
+    element ? PopUp.addListenerChangePopUp(element) : PopUp.addListenerCreatePopUp();
+    document.querySelector("#taskButtonCancel").addEventListener("click", function () {
       PopUp.removePopUp();
     });
   }
 
 
-  static addListenerCreatePopUp(element) {
-    document.querySelector("#addTaskButtonOk").addEventListener("click", function () {
+  static addListenerChangePopUp(element) {
+    document.querySelector("#taskButtonOk").addEventListener("click", function () {
       const taskName = document.querySelector("#taskName").value;
       const expirationDate = document.querySelector("#expirationDate").value;
 
@@ -45,8 +45,8 @@ export class PopUp {
   }
 
 
-  static addListenerChangePopUp() {
-    document.querySelector("#addTaskButtonOk").addEventListener("click", function () {
+  static addListenerCreatePopUp() {
+    document.querySelector("#taskButtonOk").addEventListener("click", function () {
       const taskName = document.querySelector("#taskName").value;
       const expirationDate = document.querySelector("#expirationDate").value;
       
