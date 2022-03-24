@@ -1,4 +1,4 @@
-import {tasksArray, tasksArea} from "./script.js";
+import {tasksArray} from "./script.js";
 import {Task} from "./Task.js";
 
 export class PopUp {
@@ -24,12 +24,7 @@ export class PopUp {
 
 
   static addListeners(element) {
-    if (element) {
-      PopUp.addListenerChangePopUp(element);
-    } else {
-      PopUp.addListenerCreatePopUp();
-    }
-
+    element ? PopUp.addListenerChangePopUp(element) : PopUp.addListenerCreatePopUp();
     document.querySelector("#taskButtonCancel").addEventListener("click", function () {
       PopUp.removePopUp();
     });
@@ -41,17 +36,14 @@ export class PopUp {
       const taskName = document.querySelector("#taskName").value;
       const creationDate = document.querySelector("#creationDate").value;
       const expirationDate = document.querySelector("#expirationDate").value;
-      const areFilledInputs = taskName && creationDate && expirationDate;
       
-      if (!areFilledInputs) {
-        return;
+      if (taskName && creationDate && expirationDate) {
+        const task = new Task({taskName, creationDate, expirationDate});
+
+        tasksArray.push(task);
+        document.querySelector("#tasks").innerHTML += task.createHtml();
+        PopUp.removePopUp();
       }
-
-      const task = new Task({taskName, creationDate, expirationDate});
-
-      tasksArray.push(task);
-      tasksArea.innerHTML += task.createHtml();
-      PopUp.removePopUp();
     });
   }
 
@@ -61,19 +53,16 @@ export class PopUp {
       const taskName = document.querySelector("#taskName").value;
       const creationDate = document.querySelector("#creationDate").value;
       const expirationDate = document.querySelector("#expirationDate").value;
-      const areFilledInputs = taskName && creationDate && expirationDate;
 
-      if (!areFilledInputs) {
-        return;
+      if (taskName && creationDate && expirationDate) {
+        element.taskName = taskName;
+        element.creationDate = creationDate;
+        element.expirationDate = expirationDate;
+        document.getElementById(`${element.id}`).firstElementChild.firstElementChild.firstElementChild.innerHTML = `${taskName}`;
+        document.getElementById(`${element.id}`).firstElementChild.firstElementChild.nextElementSibling.firstElementChild.innerHTML = `${creationDate}`;
+        document.getElementById(`${element.id}`).firstElementChild.lastElementChild.firstElementChild.innerHTML = `${expirationDate}`;
+        PopUp.removePopUp();
       }
-
-      element.taskName = taskName;
-      element.creationDate = creationDate;
-      element.expirationDate = expirationDate;
-      document.getElementById(`${element.id}`).firstElementChild.firstElementChild.firstElementChild.innerHTML = `${taskName}`;
-      document.getElementById(`${element.id}`).firstElementChild.firstElementChild.nextElementSibling.firstElementChild.innerHTML = `${creationDate}`;
-      document.getElementById(`${element.id}`).firstElementChild.lastElementChild.firstElementChild.innerHTML = `${expirationDate}`;
-      PopUp.removePopUp();
     });
   }
 
@@ -81,12 +70,23 @@ export class PopUp {
   static createPopUp(id) {
     const sectionPopUp = PopUp.createSectionPopUp();
     const element = tasksArray.find((item) => item.id === id);
-    const popUp = new PopUp({
-      popUpType: id ? 'Change' : 'Create',
-      taskName: id ? element.taskName : '',
-      creationDate: id ? element.creationDate : '',
-      expirationDate: id ? element.expirationDate : '',
-    });
+    let popUp;
+    
+    if (id) {
+      popUp = new PopUp({
+        popUpType: 'Change',
+        taskName: element.taskName,
+        creationDate: element.creationDate,
+        expirationDate: element.expirationDate,
+      });
+    } else {
+      popUp = new PopUp({
+        popUpType: 'Create',
+        taskName: '',
+        creationDate: '',
+        expirationDate: '',
+      });
+    }
 
     sectionPopUp.innerHTML = popUp.createHtml();
     document.body.append(sectionPopUp);

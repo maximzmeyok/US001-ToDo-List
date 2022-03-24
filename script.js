@@ -1,20 +1,14 @@
 import {Task} from "./Task.js";
 import {PopUp} from "./PopUp.js";
-import {createTask, showTasks, isValidTaskName, showWrongInput, showDefaultInput, showActiveTasks, showCompletedTasks, showAllTasks} from "./functions.js";
+import {createTask, isValidTaskName, showWrongInput, showDefaultInput} from "./functions.js";
 
 export const REGEXP = new RegExp("^[a-zA-Z0-9а-яА-ЯёЁ ]+$");
 export let tasksArray = [];
 
-let windowState = 'All';
-
-export const tasksArea = document.querySelector('#tasks');
+const tasksArea = document.querySelector('#tasks');
 const taskButton = document.querySelector('#taskButton');
 const taskButtonPlus = document.querySelector('#taskButtonPlus');
 const taskInput = document.querySelector('#taskInput');
-const activeTasksButton = document.querySelector('#activeTasksButton');
-const completedTasksButton = document.querySelector('#completedTasksButton');
-const clearCompletedTasksButton = document.querySelector('#clearCompletedTasksButton');
-const allTasksButton = document.querySelector('#allTasksButton');
 
 tasksArea.addEventListener('click', function(event) {
   const target = event.target;
@@ -23,7 +17,6 @@ tasksArea.addEventListener('click', function(event) {
     Task.removeTask(target.id);
   } else if (target.classList.contains('checkbox')) {
     Task.completeTask(target.id);
-    showTasks(windowState);
   } else if (target.classList.contains('gear')) {
     PopUp.createPopUp(target.id);
   }

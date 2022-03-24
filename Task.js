@@ -1,4 +1,4 @@
-import {tasksArray, tasksArea} from "./script.js";
+import {tasksArray} from "./script.js";
 
 export class Task {
   constructor(obj) {
@@ -40,35 +40,5 @@ export class Task {
 
     tasksArray[changedTaskIndex].isCompleted = !tasksArray[changedTaskIndex].isCompleted;
     document.getElementById(taskId).classList.toggle('line-through');
-  }
-
-
-  static showActiveTask(task) {
-    if (task.isCompleted) {
-      return;
-    }
-
-    tasksArea.innerHTML += task.createHtml();
-  }
-
-
-  static showCompletedTask(task) {
-    if (!task.isCompleted) {
-      return;
-    }
-    
-    tasksArea.innerHTML += task.createHtml();
-    document.getElementById(`${task.id}`).classList.toggle('line-through');
-  }
-
-
-  static showTask(task) {
-    tasksArea.innerHTML += task.createHtml();
-
-    if (!task.isCompleted) {
-      return;
-    }
-
-    document.getElementById(`${task.id}`).classList.toggle('line-through');
   }
 }
