@@ -1,5 +1,5 @@
 import {Task} from "./Task.js";
-import {tasksArray, REGEXP} from "./script.js";
+import {tasksArray, REGEXP, tasksArea} from "./script.js";
 
 
 export function createTask(taskName) {
@@ -9,13 +9,12 @@ export function createTask(taskName) {
   const task = new Task({taskName, creationDate, expirationDate});
 
   tasksArray.push(task);
-  document.querySelector("#tasks").innerHTML += task.createHtml();
+  tasksArea.innerHTML += task.createHtml();
 }
 
 export function transformDateForInput(date) {
   return date.split('-').map(item => item.length === 1 ? `0${item}` : item).join('-');
 }
-
 
 export function getCreationDate(currentDate) {
   return `${currentDate.getFullYear()}-${currentDate.getMonth() + 1}-${currentDate.getDate()}`;
@@ -26,14 +25,18 @@ export function getExpirationDate(currentDate) {
   let year = currentDate.getFullYear();
   let month = currentDate.getMonth();
   let day = currentDate.getDate();
+
   const monthsCount = 12;
   const daysCount = getDaysCountInMonth(month, year);
+  const lastDayOfYear = day === daysCount && month + 1 === monthsCount;
+  const lastDayOfMonth = day === daysCount;
 
-  if (day === daysCount && month + 1 === monthsCount) {
+
+  if (lastDayOfYear) {
     year++;
     month = 1;
     day = 1;
-  } else if (day === daysCount) {
+  } else if (lastDayOfMonth) {
     month++;
     day = 1;
   } else {
@@ -52,11 +55,9 @@ export function getDaysCountInMonth(month, year) {
   return daysCount;
 }
 
-
 export function isValidTaskName(taskName) {
   return taskName.match(REGEXP);
 }
-
 
 export function showWrongInput(input) {
   input.classList.add('rejected');
@@ -64,4 +65,42 @@ export function showWrongInput(input) {
 
 export function showDefaultInput(input) {
   input.classList.remove('rejected');
+}
+
+export function showActiveTasks() {
+  tasksArea.innerHTML = '';
+  tasksArray.forEach(item => Task.showActiveTask(item));
+}
+
+export function showCompletedTasks() {
+  tasksArea.innerHTML = '';
+  tasksArray.forEach(item => Task.showCompletedTask(item));
+  document.querySelectorAll('.checkbox').forEach(item => item.checked = true);
+}
+
+export function showAllTasks() {
+  tasksArea.innerHTML = '';
+  tasksArray.forEach(item => Task.showTask(item));
+  document.querySelectorAll('.checkbox').forEach(checkbox => {
+    const currentTask = tasksArray.find(task => task.id == checkbox.id);
+
+    if (!currentTask.isCompleted) {
+      return;
+    }
+
+    checkbox.checked = true;
+  });
+}
+
+export function showTasks(windowState) {
+  switch (windowState) {
+    case 'All':
+      showAllTasks();
+      break;
+    case 'Active':
+      showActiveTasks();
+      break;
+    case 'Completed':
+      showCompletedTasks();
+  }
 }
