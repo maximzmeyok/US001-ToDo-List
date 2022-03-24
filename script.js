@@ -1,7 +1,8 @@
 import {Task} from "./Task.js";
 import {PopUp} from "./PopUp.js";
-import {createTask} from "./functions.js";
+import {createTask, isValidTaskName, showWrongInput, showDefaultInput} from "./functions.js";
 
+export const REGEXP = new RegExp("^[a-zA-Z0-9 ]+$");
 export const tasksArray = [];
 
 const tasksArea = document.querySelector('#tasks');
@@ -30,10 +31,14 @@ taskButtonPlus.addEventListener('click', function() {
 });
 
 taskInput.addEventListener('keydown', function(event) {
-  if (event.code == 'Enter') {
+  showDefaultInput(taskInput);
+  
+  if (event.code == 'Enter' && isValidTaskName(taskInput.value)) {
     const taskName = taskInput.value;
 
     createTask(taskName);
     taskInput.value = '';
+  } else if (event.code == 'Enter' && !isValidTaskName(taskInput.value)) {
+    showWrongInput(taskInput);
   }
 });

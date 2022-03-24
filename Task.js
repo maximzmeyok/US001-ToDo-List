@@ -14,6 +14,7 @@ export class Task {
     <div id="${this.id}">
       <div>
         <p>Task: <span>${this.taskName}</span></p>
+        <p>Creation date: <span>${this.creationDate}</span></p>
         <p>Expiration date: <span>${this.expirationDate}</span></p>
       </div>
       <div>
