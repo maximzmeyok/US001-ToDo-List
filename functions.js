@@ -1,5 +1,5 @@
 import {Task} from "./Task.js";
-import {tasksArray, REGEXP, tasksArea} from "./script.js";
+import {tasksArray, REGEXP, tasksArea, windowState} from "./script.js";
 
 
 export function createTask(taskName) {
@@ -106,4 +106,24 @@ export function showTasks(windowState) {
     case 'Completed':
       showCompletedTasks();
   }
+}
+
+export function sortTasksByText() {
+  tasksArray.sort((a, b) => {
+    if (a.taskName > b.taskName) {
+      return 1;
+    } else if (a.taskName < b.taskName) {
+      return -1;
+    } else {
+      return 0;
+    }
+  });
+
+  showTasks(windowState);
+}
+
+export function sortTasksByDate() {
+  tasksArray.sort((a, b) => Date.parse(a.expirationDate) - Date.parse(b.expirationDate));
+  
+  showTasks(windowState);
 }
