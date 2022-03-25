@@ -1,5 +1,6 @@
-import {} from "./script.js";
+import {tasksArray, tasksArea} from "./script.js";
 import {sortTasksByText, sortTasksByDate} from "./functions.js";
+import {Task} from "./Task.js";
 
 export class SortBlock {
   static createHtml() {
@@ -49,6 +50,20 @@ export class SortBlock {
     })
 
     document.querySelector("#filterButton").addEventListener("click", function () {
+      const filterValue = document.querySelector("#filterInput").value;
+      const filtredArray = tasksArray.filter(item => item.taskName.includes(filterValue));
+
+      tasksArea.innerHTML = '';
+      filtredArray.forEach(item => Task.showTask(item));
+      document.querySelectorAll('.checkbox').forEach(checkbox => {
+        const currentTask = tasksArray.find(task => task.id == checkbox.id);
+    
+        if (!currentTask.isCompleted) {
+          return;
+        }
+    
+        checkbox.checked = true;
+      });
       SortBlock.removeSortBlock();
     })
 

@@ -124,6 +124,6 @@ export function sortTasksByText() {
 
 export function sortTasksByDate() {
   tasksArray.sort((a, b) => Date.parse(a.expirationDate) - Date.parse(b.expirationDate));
-  console.log(tasksArray);
+  
   showTasks(windowState);
 }
