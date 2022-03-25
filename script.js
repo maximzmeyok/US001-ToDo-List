@@ -1,15 +1,16 @@
 import {Task} from "./Task.js";
 import {PopUp} from "./PopUp.js";
 import {createTask, showTasks, isValidTaskName, showWrongInput, showDefaultInput, showActiveTasks, showCompletedTasks, showAllTasks} from "./functions.js";
+import { SortBlock } from "./SortBlock.js";
 
 export const REGEXP = new RegExp("^[a-zA-Z0-9а-яА-ЯёЁ ]+$");
 export let tasksArray = [];
 
-let windowState = 'All';
+export let windowState = 'All';
 
 export const tasksArea = document.querySelector('#tasks');
-const taskButton = document.querySelector('#taskButton');
 const taskButtonPlus = document.querySelector('#taskButtonPlus');
+const sortBlockButton = document.querySelector('#sortBlockButton');
 const taskInput = document.querySelector('#taskInput');
 const activeTasksButton = document.querySelector('#activeTasksButton');
 const completedTasksButton = document.querySelector('#completedTasksButton');
@@ -27,10 +28,6 @@ tasksArea.addEventListener('click', function(event) {
   } else if (target.classList.contains('gear')) {
     PopUp.createPopUp(target.id);
   }
-});
-
-taskButton.addEventListener('click', function() {
-  PopUp.createPopUp();
 });
 
 taskButtonPlus.addEventListener('click', function() {
@@ -69,3 +66,7 @@ clearCompletedTasksButton.addEventListener('click', function() {
   tasksArray = tasksArray.filter(item => item.isCompleted === false);
   showTasks(windowState);
 });
+
+sortBlockButton.addEventListener('click', function() {
+  SortBlock.createSortBlock();
+})

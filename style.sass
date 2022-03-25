@@ -61,9 +61,10 @@ h1
         outline: none
         padding: 5px
         border-bottom: 3px solid gray
-      .button-plus
+      .input-button
         min-width: 40px
         height: 40px
+        font-size: 20px
     .task-types
       display: flex
       gap: 10px
@@ -87,6 +88,29 @@ h1
           color: gray
 
 .pop
+  position: fixed
+  top: 0px
+  left: 0px
+  height: 100vh
+  width: 100vw
+  background: rgba(255, 255, 255, 0.8)
+  display: flex
+  justify-content: center
+  align-items: center
+  &-container
+    padding: 20px
+    background: $white-color
+    border: 5px solid $extra-color
+    min-width: 320px
+    width: 50vw
+    input
+      outline: none
+      width: 100%
+      padding: 5px
+      border-bottom: 3px solid gray
+      margin-bottom: 30px
+
+.sort-block
   position: fixed
   top: 0px
   left: 0px
