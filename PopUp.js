@@ -1,5 +1,6 @@
 import {tasksArray, tasksArea} from "./script.js";
 import {Task} from "./Task.js";
+import {showWrongInput, isValidTaskName, showDefaultInput} from "./functions.js"
 
 export class PopUp {
   constructor(obj) {
@@ -24,6 +25,28 @@ export class PopUp {
 
 
   static addListeners(element) {
+    const taskNameInput = document.querySelector("#taskName");
+    const creationDateInput = document.querySelector("#creationDate");
+    const expirationDateInput = document.querySelector("#expirationDate");
+
+    taskNameInput.addEventListener('keydown', function() {
+      showDefaultInput(taskNameInput);
+      showDefaultInput(creationDateInput);
+      showDefaultInput(expirationDateInput);
+    });
+
+    creationDateInput.addEventListener('click', function() {
+      showDefaultInput(taskNameInput);
+      showDefaultInput(creationDateInput);
+      showDefaultInput(expirationDateInput);
+    });
+
+    expirationDateInput.addEventListener('click', function() {
+      showDefaultInput(taskNameInput);
+      showDefaultInput(creationDateInput);
+      showDefaultInput(expirationDateInput);
+    });
+
     if (element) {
       PopUp.addListenerChangePopUp(element);
     } else {
@@ -38,12 +61,20 @@ export class PopUp {
 
   static addListenerCreatePopUp() {
     document.querySelector("#taskButtonOk").addEventListener("click", function () {
-      const taskName = document.querySelector("#taskName").value;
-      const creationDate = document.querySelector("#creationDate").value;
-      const expirationDate = document.querySelector("#expirationDate").value;
-      const areFilledInputs = taskName && creationDate && expirationDate;
+      const taskNameInput = document.querySelector("#taskName");
+      const creationDateInput = document.querySelector("#creationDate");
+      const expirationDateInput = document.querySelector("#expirationDate");
+      const taskName = taskNameInput.value;
+      const creationDate = creationDateInput.value;
+      const expirationDate = expirationDateInput.value;
+      const isValidDate = Date.parse(expirationDate) >= Date.parse(creationDate);
+      const areFilledInputs = isValidTaskName(taskName) && isValidDate;
 
       if (!areFilledInputs) {
+        showWrongInput(taskNameInput);
+        showWrongInput(creationDateInput);
+        showWrongInput(expirationDateInput);
+
         return;
       }
 
@@ -58,12 +89,20 @@ export class PopUp {
 
   static addListenerChangePopUp(element) {
     document.querySelector("#taskButtonOk").addEventListener("click", function () {
-      const taskName = document.querySelector("#taskName").value;
-      const creationDate = document.querySelector("#creationDate").value;
-      const expirationDate = document.querySelector("#expirationDate").value;
-      const areFilledInputs = taskName && creationDate && expirationDate;
+      const taskNameInput = document.querySelector("#taskName");
+      const creationDateInput = document.querySelector("#creationDate");
+      const expirationDateInput = document.querySelector("#expirationDate");
+      const taskName = taskNameInput.value;
+      const creationDate = creationDateInput.value;
+      const expirationDate = expirationDateInput.value;
+      const isValidDate = Date.parse(expirationDate) >= Date.parse(creationDate);
+      const areFilledInputs = isValidTaskName(taskName) && isValidDate;
 
       if (!areFilledInputs) {
+        showWrongInput(taskNameInput);
+        showWrongInput(creationDateInput);
+        showWrongInput(expirationDateInput);
+
         return;
       }
 
